@@ -1,0 +1,11 @@
+node{
+
+    stage('Checkout') {
+        checkout scm
+    }
+
+    stage('Release to QA'){
+        sh "kubectl config use-context aws_QA"
+        sh "kubectl apply -f configuration-api-parent/configuration-api/kubernetes/config-api-qa-deployment.yml --record"
+    }
+}
